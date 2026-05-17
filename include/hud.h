@@ -254,7 +254,7 @@ static void render_debug_overlay(SDL_Renderer* r, const Player& p, const DebugIn
     line(buf, HUD_GRAY);
     SDL_snprintf(buf,sizeof(buf),"Active rooms:     %d", di.activeRooms);
     line(buf);
-    SDL_snprintf(buf,sizeof(buf),"Memory:           %zu KB", di.memUsageKB);
+    SDL_snprintf(buf,sizeof(buf),"Memory:           %u KB", (unsigned)di.memUsageKB);
     line(buf);
     line("", HUD_GRAY);
     SDL_snprintf(buf,sizeof(buf),"Weapon: %s", weapon_names[di.currentWeapon]);
