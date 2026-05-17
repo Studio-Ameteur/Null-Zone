@@ -38,6 +38,7 @@ if(MINGW)
         bz2
         png
         z
+        dwrite
         opengl32
         gdi32
         winmm
