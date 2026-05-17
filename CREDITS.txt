@@ -1,0 +1,110 @@
+================================================================================
+                              NULL ZONE
+                             CREDITS
+================================================================================
+
+Game:           Null Zone
+Version:        0.0.1
+Author:         Savva Polyakov
+Contact:        solo2244rt@gmail.com
+Year:           2026
+
+================================================================================
+                         DEVELOPMENT
+================================================================================
+
+  Game Design, Programming, Art:   Savva Polyakov
+  Engine:                          Custom raycaster (original work)
+  Level Generation:                Custom BSP procedural generator
+  Audio Synthesis:                 Custom procedural audio engine
+  Texture Generation:              Custom procedural texture system
+
+================================================================================
+                       THIRD-PARTY LIBRARIES
+================================================================================
+
+This software makes use of the following open-source libraries.
+Their inclusion does not imply endorsement by their authors.
+
+--------------------------------------------------------------------------------
+SDL2 (Simple DirectMedia Layer 2)
+--------------------------------------------------------------------------------
+
+  Copyright (c) 1997-2024 Sam Lantinga <slouken@libsdl.org>
+
+  This software is provided 'as-is', without any express or implied warranty.
+  In no event will the authors be held liable for any damages arising from
+  the use of this software.
+
+  Permission is granted to anyone to use this software for any purpose,
+  including commercial applications, and to alter it and redistribute it
+  freely, subject to the following restrictions:
+
+  1. The origin of this software must not be misrepresented; you must not
+     claim that you wrote the original software. If you use this software
+     in a product, an acknowledgment in the product documentation would be
+     appreciated but is not required.
+  2. Altered source versions must be plainly marked as such, and must not be
+     misrepresented as being the original software.
+  3. This notice may not be removed or altered from any source distribution.
+
+  License: zlib license
+  Website: https://www.libsdl.org/
+
+--------------------------------------------------------------------------------
+SDL2_mixer
+--------------------------------------------------------------------------------
+
+  Copyright (c) 1997-2024 Sam Lantinga <slouken@libsdl.org>
+
+  Licensed under the zlib license (same terms as SDL2 above).
+
+  Used for: Audio output and mixing of procedurally generated sounds.
+
+  License: zlib license
+  Website: https://github.com/libsdl-org/SDL_mixer
+
+--------------------------------------------------------------------------------
+SDL2_ttf
+--------------------------------------------------------------------------------
+
+  Copyright (c) 1997-2024 Sam Lantinga <slouken@libsdl.org>
+
+  Licensed under the zlib license (same terms as SDL2 above).
+
+  Used for: Rendering text in HUD and menus using system fonts.
+
+  License: zlib license
+  Website: https://github.com/libsdl-org/SDL_ttf
+
+--------------------------------------------------------------------------------
+FreeType (used internally by SDL2_ttf)
+--------------------------------------------------------------------------------
+
+  Copyright (c) 1996-2024 David Turner, Robert Wilhelm, Werner Lemberg.
+
+  This software uses the FreeType library, which is licensed under the
+  FreeType License (BSD-style) or the GNU General Public License.
+
+  License: FreeType License / GPLv2
+  Website: https://freetype.org/
+
+================================================================================
+                         SYSTEM FONTS
+================================================================================
+
+  This software renders text using fonts installed on the user's system
+  (e.g. Courier New, Arial, Verdana, Tahoma — property of their respective
+  owners). No font files are bundled with this software.
+
+================================================================================
+                         SPECIAL THANKS
+================================================================================
+
+  - id Software — for creating Doom and inspiring an entire genre
+  - The SDL community — for maintaining excellent cross-platform libraries
+  - The open-source community — for making game development accessible
+
+================================================================================
+Null Zone v0.0.1 — Copyright (c) 2026 Savva Polyakov — All Rights Reserved
+================================================================================
