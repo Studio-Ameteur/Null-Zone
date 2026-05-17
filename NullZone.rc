@@ -1,0 +1,35 @@
+#include <windows.h>
+
+IDI_ICON1 ICON "assets/icon32.ico"
+
+1 RT_MANIFEST "NullZone.manifest"
+
+VS_VERSION_INFO VERSIONINFO
+  FILEVERSION     0,0,1,0
+  PRODUCTVERSION  0,0,1,0
+  FILEFLAGSMASK   VS_FFI_FILEFLAGSMASK
+  FILEFLAGS       0
+  FILEOS          VOS_NT_WINDOWS32
+  FILETYPE        VFT_APP
+  FILESUBTYPE     VFT_UNKNOWN
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK "040904B0"
+    BEGIN
+      VALUE "CompanyName",      "Savva Polyakov"
+      VALUE "FileDescription",  "Null Zone — First Person Shooter"
+      VALUE "FileVersion",      "0.0.1"
+      VALUE "InternalName",     "NullZone"
+      VALUE "LegalCopyright",   "Copyright (c) 2026 Savva Polyakov. All rights reserved."
+      VALUE "OriginalFilename", "NullZone.exe"
+      VALUE "ProductName",      "Null Zone"
+      VALUE "ProductVersion",   "0.0.1"
+      VALUE "Comments",         "Contact: solo2244rt@gmail.com"
+    END
+  END
+  BLOCK "VarFileInfo"
+  BEGIN
+    VALUE "Translation", 0x0409, 0x04B0
+  END
+END
