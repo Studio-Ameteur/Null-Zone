@@ -1,0 +1,84 @@
+================================================================================
+                              NULL ZONE
+                         COPYRIGHT NOTICE
+================================================================================
+
+Copyright (c) 2026 Savva Polyakov. All rights reserved.
+
+Game Title:     Null Zone
+Version:        0.0.1
+Author:         Savva Polyakov
+Contact:        solo2244rt@gmail.com
+
+================================================================================
+                         INTELLECTUAL PROPERTY
+================================================================================
+
+All content contained within this software, including but not limited to:
+
+  - Game engine source code and architecture
+  - Procedural texture generation algorithms
+  - Procedural level generation system (BSP-based)
+  - Procedural audio synthesis system
+  - Save file formats (.mre and .retje)
+  - Game mechanics, systems and design
+  - Enemy AI behavior and logic
+  - Weapon systems and balancing
+  - All visual and audio content generated at runtime
+
+...is the original and exclusive intellectual property of Savva Polyakov.
+
+================================================================================
+                            TERMS OF USE
+================================================================================
+
+This software is proprietary. No part of this software, including source code,
+compiled binaries, assets, or design documentation, may be:
+
+  - Copied or reproduced in any form without prior written permission
+  - Distributed, sold, or sublicensed to any third party
+  - Decompiled, disassembled, or reverse engineered
+  - Modified or used as a basis for derivative works
+  - Used for commercial purposes without explicit written consent
+
+Unauthorized use, reproduction, or distribution of this software or any portion
+of it may result in severe civil and criminal penalties, and will be prosecuted
+to the maximum extent possible under applicable law.
+
+================================================================================
+                         SAVE FILE FORMATS
+================================================================================
+
+The file formats .mre and .retje are proprietary formats created exclusively
+for Null Zone by Savva Polyakov. These formats are not documented publicly
+and are not intended for use by any third-party software.
+
+Attempts to reverse engineer, decode, or manipulate these file formats without
+authorization constitute a violation of this copyright notice.
+
+================================================================================
+                              DISCLAIMER
+================================================================================
+
+THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES OR
+OTHER LIABILITY ARISING FROM THE USE OF THIS SOFTWARE.
+
+================================================================================
+                              CONTACT
+================================================================================
+
+For licensing inquiries, permissions, or other questions:
+
+  Email:  solo2244rt@gmail.com
+  Author: Savva Polyakov
+
+================================================================================
+                        THIRD-PARTY NOTICES
+================================================================================
+
+This software uses third-party libraries. See CREDITS.txt for details.
+
+================================================================================
+Null Zone v0.0.1 — Copyright (c) 2026 Savva Polyakov — All Rights Reserved
+================================================================================
