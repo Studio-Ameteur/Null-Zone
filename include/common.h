@@ -258,7 +258,7 @@ struct DebugInfo {
     int      activeRooms;
     int      totalEntities;
     int      aggroEntities;
-    size_t   memUsageKB;
+    unsigned memUsageKB;
     int      level;
     uint32_t seed;
     double   playerX;
