@@ -33,6 +33,7 @@ jobs:
             mingw-w64-x86_64-libjpeg-turbo
             mingw-w64-x86_64-libtiff
             mingw-w64-x86_64-libwebp
+            mingw-w64-x86_64-zstd
             mingw-w64-x86_64-winpthreads-git
 
       - name: Copy dependencies into project
@@ -52,6 +53,7 @@ jobs:
           cp /mingw64/lib/libz.a                   SDL2/lib/libz.a
           cp /mingw64/lib/libjpeg.a                SDL2/lib/libjpeg.a
           cp /mingw64/lib/libtiff.a                SDL2/lib/libtiff.a
+          cp /mingw64/lib/libzstd.a                SDL2/lib/libzstd.a
           cp /mingw64/lib/libwebp.a                SDL2/lib/libwebp.a
           cp /mingw64/lib/libwebpdecoder.a         SDL2/lib/libwebpdecoder.a
           cp /mingw64/lib/libsharpyuv.a            SDL2/lib/libsharpyuv.a
