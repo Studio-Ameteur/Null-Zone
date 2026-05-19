@@ -43,6 +43,7 @@ if(MINGW)
         z
         jpeg
         tiff
+        zstd
         webp
         webpdecoder
         sharpyuv
