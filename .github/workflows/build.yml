@@ -30,6 +30,13 @@ jobs:
             mingw-w64-x86_64-SDL2_image
             mingw-w64-x86_64-SDL2_mixer
 
+      - name: Copy headers
+        shell: msys2 {0}
+        run: |
+          cp /mingw64/include/SDL2/SDL_ttf.h    SDL2/furto/SDL_ttf.h
+          cp /mingw64/include/SDL2/SDL_image.h  SDL2/furto/SDL_image.h
+          cp /mingw64/include/SDL2/SDL_mixer.h  SDL2/furto/SDL_mixer.h
+
       - name: Configure
         shell: msys2 {0}
         run: |
@@ -48,10 +55,10 @@ jobs:
       - name: Copy DLLs
         shell: msys2 {0}
         run: |
-          cp /mingw64/bin/SDL2.dll              build/bin/
-          cp /mingw64/bin/SDL2_ttf.dll          build/bin/
-          cp /mingw64/bin/SDL2_image.dll        build/bin/
-          cp /mingw64/bin/SDL2_mixer.dll        build/bin/
+          cp /mingw64/bin/SDL2.dll          build/bin/
+          cp /mingw64/bin/SDL2_ttf.dll      build/bin/
+          cp /mingw64/bin/SDL2_image.dll    build/bin/
+          cp /mingw64/bin/SDL2_mixer.dll    build/bin/
           ldd build/bin/NullZone.exe | grep mingw | awk '{print $3}' | xargs -I{} cp {} build/bin/ || true
 
       - name: Package
