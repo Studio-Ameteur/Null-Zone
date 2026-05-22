@@ -50,6 +50,8 @@ struct Player {
     double footstepInterval;
     double damageFlash;
     double pickupFlash;
+    int    weaponAnimFrame;
+    double weaponAnimTimer;
 };
 
 static Player g_player = {};
@@ -187,6 +189,16 @@ inline void player_update(Player& p, double dt, bool& footstep) {
     Weapon& w=p.weapons[p.currentWeapon];
     if(w.fireTimer>0) w.fireTimer-=dt;
 
+    if(p.weaponAnimFrame>0){
+        p.weaponAnimTimer+=dt;
+        if(p.weaponAnimTimer>=0.1){
+            p.weaponAnimTimer=0.0;
+            p.weaponAnimFrame++;
+            if(p.weaponAnimFrame>=g_weapon_sheets[p.currentWeapon].totalFrames)
+                p.weaponAnimFrame=0;
+        }
+    }
+
     int wd=wheel();
     if(wd!=0) player_switch_weapon(p,wd>0?1:-1);
 
@@ -216,6 +228,8 @@ inline bool player_do_fire(Player& p) {
     if(!melee&&w.ammo<=0) return false;
     if(!melee) w.ammo--;
     w.fireTimer=w.fireRate;
+    p.weaponAnimFrame=1;
+    p.weaponAnimTimer=0.0;
     return true;
 }
 
