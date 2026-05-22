@@ -7,6 +7,7 @@
 
 #include "include/common.h"
 #include "include/textures.h"
+#include "include/sprites.h"
 #include "include/input.h"
 #include "include/world.h"
 #include "include/generator.h"
@@ -342,6 +343,7 @@ int WINAPI WinMain(HINSTANCE,HINSTANCE,LPSTR,int) {
 
     textures_init();
     textures_init_renderer(g_renderer);
+    sprites_init(g_renderer);
     renderer_init(g_renderer);
     audio_init();
     input_init();
@@ -501,6 +503,7 @@ int WINAPI WinMain(HINSTANCE,HINSTANCE,LPSTR,int) {
 
     mouse_capture(false);
     textures_shutdown();
+    sprites_shutdown();
     if(g_credits_music){Mix_HaltMusic();Mix_FreeMusic(g_credits_music);}
     audio_shutdown();
     renderer_destroy();
