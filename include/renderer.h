@@ -294,7 +294,7 @@ inline void renderer_draw_frame(SDL_Renderer* rend, const Player& p) {
     }
 
     int sw=dst.w,sh=dst.h;
-    if(!sprites_draw_weapon(rend,p.currentWeapon,p.bobAmt,p.bobSide,sw,sh)){
+    if(!sprites_draw_weapon(rend,p.currentWeapon,p.weaponAnimFrame,p.bobAmt,p.bobSide,sw,sh)){
         int wi=p.currentWeapon;
         static const Color wc[MAX_WEAPONS]={
             {180,140,100},{200,180,150},{180,150,120},{160,160,170},
