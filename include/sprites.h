@@ -16,22 +16,28 @@ static SpriteSheet g_weapon_sheets[MAX_WEAPONS] = {};
 static SpriteSheet g_enemy_sheets[15]           = {};
 static SDL_Renderer* g_spr_rend                 = nullptr;
 
-static const char* weapon_files[MAX_WEAPONS] = {
-    nullptr,
-    "assets/sprites/weapons/PIST1.png",
-    "assets/sprites/weapons/Sgun.png",
-    "assets/sprites/weapons/MCGUN1.png",
-    "assets/sprites/weapons/PIST2.png",
-    nullptr,
-    nullptr,
-    "assets/sprites/weapons/Sgun.png",
-    nullptr,
-    nullptr,
-    nullptr,
-    "assets/sprites/weapons/MCGUN1.png",
-    nullptr,
-    nullptr,
-    "assets/sprites/weapons/PICK1.png"
+struct WeaponSpriteInfo {
+    const char* file;
+    int frameW;
+    int frameH;
+};
+
+static const WeaponSpriteInfo weapon_info[MAX_WEAPONS] = {
+    {nullptr, 0, 0},                                      // 0: Fists
+    {"assets/sprites/weapons/PIST1.png", 144, 145},       // 1: Pistol (2x2)
+    {"assets/sprites/weapons/Sgun.png", 133, 142},        // 2: Shotgun (4x5)
+    {"assets/sprites/weapons/MCGUN1.png", 127, 140},      // 3: Auto (4x2)
+    {"assets/sprites/weapons/PIST2.png", 100, 127},       // 4: Sniper (3x2)
+    {nullptr, 0, 0},                                      // 5: Rocket
+    {nullptr, 0, 0},                                      // 6: Plasma
+    {"assets/sprites/weapons/Sgun.png", 133, 142},        // 7: Super Shotgun (4x5)
+    {nullptr, 0, 0},                                      // 8: Flamethrower
+    {nullptr, 0, 0},                                      // 9: Railgun
+    {nullptr, 0, 0},                                      // 10: Grenade
+    {"assets/sprites/weapons/MCGUN1.png", 127, 140},      // 11: Minigun (4x2)
+    {nullptr, 0, 0},                                      // 12: Cryo
+    {nullptr, 0, 0},                                      // 13: Chainsaw
+    {"assets/sprites/weapons/PICK1.png", 141, 168}        // 14: BFG (3x2)
 };
 
 struct EnemySpriteInfo {
@@ -81,16 +87,22 @@ inline void sprites_init(SDL_Renderer* rend) {
     IMG_Init(IMG_INIT_PNG|IMG_INIT_JPG);
 
     for(int i=0;i<MAX_WEAPONS;i++){
-        if(!weapon_files[i]) continue;
-        SDL_Surface* s=IMG_Load(weapon_files[i]);
-        if(!s) continue;
-        g_weapon_sheets[i].tex        = SDL_CreateTextureFromSurface(rend,s);
-        g_weapon_sheets[i].frameW     = s->w;
-        g_weapon_sheets[i].frameH     = s->h;
-        g_weapon_sheets[i].cols       = 1;
-        g_weapon_sheets[i].rows       = 1;
-        g_weapon_sheets[i].totalFrames= 1;
-        SDL_FreeSurface(s);
+        if(!weapon_info[i].file) continue;
+        bool reused=false;
+        for(int j=0;j<i;j++){
+            if(weapon_info[j].file &&
+               strcmp(weapon_info[i].file, weapon_info[j].file)==0 &&
+               weapon_info[i].frameW==weapon_info[j].frameW &&
+               weapon_info[i].frameH==weapon_info[j].frameH) {
+                g_weapon_sheets[i]=g_weapon_sheets[j];
+                reused=true; break;
+            }
+        }
+        if(!reused)
+            g_weapon_sheets[i]=load_sheet(rend,
+                weapon_info[i].file,
+                weapon_info[i].frameW,
+                weapon_info[i].frameH);
     }
 
     for(int i=0;i<15;i++){
@@ -127,11 +139,16 @@ inline void sprites_shutdown() {
     IMG_Quit();
 }
 
-inline bool sprites_draw_weapon(SDL_Renderer* r, int wi,
+inline bool sprites_draw_weapon(SDL_Renderer* r, int wi, int frame,
                                  double bobAmt, double bobSide,
                                  int sw, int sh) {
     SpriteSheet& s=g_weapon_sheets[wi];
     if(!s.tex) return false;
+    if(frame<0||frame>=s.totalFrames) frame=0;
+
+    int col=frame%s.cols;
+    int row=frame/s.cols;
+    SDL_Rect src={col*s.frameW,row*s.frameH,s.frameW,s.frameH};
 
     int dh=sh*2/5;
     int dw=(int)((double)s.frameW/s.frameH*dh);
@@ -139,7 +156,7 @@ inline bool sprites_draw_weapon(SDL_Renderer* r, int wi,
     int dy=sh-dh+(int)(std::abs(bobAmt)*sh*0.05);
 
     SDL_Rect dst={dx,dy,dw,dh};
-    SDL_RenderCopy(r,s.tex,nullptr,&dst);
+    SDL_RenderCopy(r,s.tex,&src,&dst);
     return true;
 }
 
