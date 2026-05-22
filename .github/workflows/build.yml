@@ -1,0 +1,86 @@
+name: Build NullZone
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install MinGW and ALL dependencies
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          update: true
+          cache: false
+          install: >-
+            mingw-w64-x86_64-gcc
+            mingw-w64-x86_64-cmake
+            mingw-w64-x86_64-ninja
+            mingw-w64-x86_64-SDL2
+            mingw-w64-x86_64-SDL2_ttf
+            mingw-w64-x86_64-SDL2_image
+            mingw-w64-x86_64-SDL2_mixer
+
+      - name: Copy headers
+        shell: msys2 {0}
+        run: |
+          cp /mingw64/include/SDL2/SDL_ttf.h    SDL2/furto/SDL_ttf.h
+          cp /mingw64/include/SDL2/SDL_image.h  SDL2/furto/SDL_image.h
+          cp /mingw64/include/SDL2/SDL_mixer.h  SDL2/furto/SDL_mixer.h
+
+      - name: Configure
+        shell: msys2 {0}
+        run: |
+          cmake -B build \
+            -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_C_COMPILER=x86_64-w64-mingw32-gcc \
+            -DCMAKE_CXX_COMPILER=x86_64-w64-mingw32-g++ \
+            -DCMAKE_RC_COMPILER=windres \
+            -DMINGW=ON
+
+      - name: Build
+        shell: msys2 {0}
+        run: cmake --build build --config Release
+
+      - name: Copy DLLs
+        shell: msys2 {0}
+        run: |
+          cp /mingw64/bin/SDL2.dll          build/bin/
+          cp /mingw64/bin/SDL2_ttf.dll      build/bin/
+          cp /mingw64/bin/SDL2_image.dll    build/bin/
+          cp /mingw64/bin/SDL2_mixer.dll    build/bin/
+          ldd build/bin/NullZone.exe | grep mingw | awk '{print $3}' | xargs -I{} cp {} build/bin/ || true
+
+      - name: Package
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path release
+          Copy-Item build/bin/* release/ -Recurse
+          Copy-Item COPYRIGHT.txt release/
+          Copy-Item CREDITS.txt release/
+          Compress-Archive -Path release/* -DestinationPath NullZone_v0.0.1_win.zip
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: NullZone_v0.0.1_win
+          path: NullZone_v0.0.1_win.zip
+          retention-days: 30
+
+      - name: Release on tag
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v1
+        with:
+          files: NullZone_v0.0.1_win.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
